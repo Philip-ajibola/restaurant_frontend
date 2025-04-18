@@ -34,7 +34,10 @@ export default function LandingPage() {
     const handleNext = () => {
         if (currentSlide < totalSlides - 1) {
             setCurrentSlide(currentSlide + 1);
+        }else{
+            route.push('/register/register')
         }
+
     };
 
     const handleSkip = () => {
