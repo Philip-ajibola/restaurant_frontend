@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  react-native:
+    build: .
+    ports:
+      - '8081:8081' # Metro bundler port
+    volumes:
+      - .:/app # Mount the local project directory into the container
+    environment:
+      - REACT_NATIVE_PACKAGER_HOSTNAME=host.docker.internal
+    tty: true
