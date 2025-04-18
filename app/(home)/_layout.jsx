@@ -60,7 +60,7 @@ const Layout = () =>(
                         onPress={() => handleLogout()}
                         className="mr-4"
                     >
-                        <MaterialIcons name="logout" size={24} color="#fff" />
+                        <MaterialIcons name="logout" size={24} color="#2D3748" />
                     </TouchableOpacity>
                 ),
                 tabBarIcon:({focused}) => <TabIcon focused={focused} source={home}/>

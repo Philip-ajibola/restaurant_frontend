@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-na
 import { TextInput, HelperText } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false); // Loading state for the button
+    const [loading, setLoading] = useState(false);
     const route = useRouter();
 
     const isValidEmail = (email) => {
@@ -36,15 +37,16 @@ export default function RegisterPage() {
     const handleRegister = async () => {
         if (!validateForm()) return;
 
-        setLoading(true); // Start loading
+        setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users/', {
+            const response = await axios.post('http://172.20.10.2:5000/api/users/', {
                 username,
                 email,
                 password,
             });
-
+            console.log(response)
+            await AsyncStorage.setItem("user", JSON.stringify(response.data.user));
             if (response.status === 201) {
                 Alert.alert('Success', 'User registered successfully!');
                 route.push('(home)/homePage');

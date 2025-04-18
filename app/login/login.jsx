@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-na
 import { TextInput, HelperText } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -35,11 +36,12 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users/auth', {
+            const response = await axios.post('http://172.20.10.2:5000/api/users/auth', {
                 email,
                 password,
             });
 
+            await AsyncStorage.setItem("user", JSON.stringify(response.data.user));
             if (response.status === 200) {
                 Alert.alert('Success', 'Logged in successfully!');
                 route.push('(home)/homePage');

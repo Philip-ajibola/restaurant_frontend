@@ -5,7 +5,7 @@ const FoodCard = ({ food }) => {
     return (
         <View className="w-[250px] h-[300px] bg-gray-800 rounded-lg shadow-md ">
             <Image
-                source={food.img}
+                src={food.picture_url}
                 className="w-full h-40 rounded-lg mb-2"
                 resizeMode="cover"
             />
